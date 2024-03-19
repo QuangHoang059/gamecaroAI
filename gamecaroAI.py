@@ -5,10 +5,8 @@ import copy
 import os
 import ctypes
 
-script_dir = os.path.dirname(os.path.abspath(__file__))
-
 # Construct the full path to the DLL file
-dll_path = os.path.join(script_dir, "brain.dll")
+dll_path = "./brain.dll"
 brain = ctypes.CDLL(dll_path)
 brain.minmaxalphabeta.argtypes = [
     ctypes.POINTER(ctypes.c_int),
@@ -188,12 +186,12 @@ class GameAI:
         self.event = event
         self.draw()
         self.__drawWinLoss()
-        if not self.__checkwin():
+        if self.playerwin == 0:
             self.playerisclikMouse()
+            self.__checkwin()
             self.__turns()
             self.__coolDown()
             self.AI_X()
-        # print(Values(self.map))
 
     def __coolDown(self):
         self.cooldown += 1
@@ -303,8 +301,9 @@ class GameAI:
                 or coutcrossright == 5
             ):
                 if self.player == 1:
+                    print(234243)
                     self.playerwin = 1
-                else:
+                elif self.player == 2:
                     self.playerwin = 2
                 return 1
         return 0
@@ -382,7 +381,6 @@ class GameAI:
             actions = (ctypes.c_int * len(actions))(*actions)
             idx = brain.getLegalActions(maps, actions, self.player)
             actions = np.array(actions).reshape(400, 2)[:idx, :]
-            print(actions)
             maxaction = -99999999999
             # result=[9,9]
             for action in actions:
