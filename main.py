@@ -2,8 +2,9 @@ import pygame as pg
 from gamecaro import Game1x1
 from gamecaroAI import GameAI
 from start import Option
+
 pg.init()
-pg.display.set_caption("Demogame")
+pg.display.set_caption("Game Caro")
 pg_icon = pg.image.load(".\img\cat-cupid-love-icon.png")
 pg.display.set_icon(pg_icon)
 fps = 60
