@@ -397,7 +397,6 @@ class GameAI:
                         pass
                 maps[action[0] * leny + action[1]] = 0
 
-            print(self.pos_compter, "ddieerm may di")
             self.map[self.pos_compter[0]][self.pos_compter[1]] = self.player
 
             self.checkpoint = self.pos_compter
